@@ -1,220 +1,109 @@
-| Função                        | Firebase | MongoDB |
-| ----------------------------- | -------- | ------- |
-| **CRUD Básico**               |          |         |
-| Criar documento               | V        | V       |
-| Ler documento                 | V        | V       |
-| Atualizar documento           | V        | V       |
-| Excluir documento             | V        | V       |
-| **Consultas**                 |          |         |
-| Consulta simples              | V        | V       |
-| Consulta avançada             | X        | V       |
-| Ordenação                     | X        | V       |
-| Filtro de documentos          | V        | V       |
-| **Índices**                   |          |         |
-| Gerenciamento de índices      | X        | V       |
-| **Transações**                |          |         |
-| Suporte a transações          | V        | V       |
-| **Limitação de Resultados**   | V        | V       |
-| **Agregações**                | X        | V       |
-| **Segurança**                 |          |         |
-| Autenticação de usuários      | V        | X       |
-| Controle de acesso            | V        | V       |
-| **Escalabilidade**            |          |         |
-| Escalabilidade automática     | V        | V       |
-| **Armazenamento de Arquivos** | V        | X       |
-| **Geolocalização**            | V        | X       |
+# Documentação do Sistema, Usando Modelagem de sistema orientados a objetos.
 
-Connect to your MongoDB server:
+Este documento descreve as classes, métodos e relações no sistema de cloud da IVIPCOIN.
 
-```typescript
-const MongoClient = require("mongodb").MongoClient;
+Servicos Existente entre o FIREBASE E O MONGODB
+![Alt text](/image/image.png)
 
-MongoClient.connect("mongodb://localhost:27017", (err, client) => {
-  if (err) throw err;
+Usando Modelagem, será projetado um sistema usando diagramas de classes.
 
-  const db = client.db("mydb");
-  const collection = db.collection("users");
-  // Perform operations on the collection here.
-  client.close();
-});
-```
+## Classes
 
-### CRUD Operations
+### Authentication System
 
-Create Document
+- `authenticate()`: Método para autenticar um usuário.
+- `authorize()`: Método para autorizar um usuário.
+- `createUser()`: Método para criar um novo usuário.
+- `resetPassword()`: Método para redefinir a senha de um usuário.
+- `hostApp()`: Método para hospedar um aplicativo.
+- `storeData()`: Método para armazenar dados.
+- `scaleSystem()`: Método para escalabilidade do sistema.
+- `scaleCloudService()`: Método para escalabilidade de serviços em nuvem.
 
-```typescript
-collection.insertOne(
-  {
-    name: "Maria",
-    age: 30,
-    city: "Los Angeles",
-  },
-  (err, result) => {
-    if (err) throw err;
-    console.log("Document inserted successfully");
-  }
-);
-```
+### Real-Time Database
 
-Read Document
+- `connect()`: Método para conectar-se ao banco de dados em tempo real.
+- `subscribe()`: Método para se inscrever em atualizações em tempo real.
+- `unsubscribe()`: Método para cancelar a inscrição em atualizações em tempo real.
+- `updateData()`: Método para atualizar dados em tempo real.
+- `getData()`: Método para obter dados em tempo real.
+- `queryData()`: Método para consultar dados em tempo real.
+- `syncOffline()`: Método para sincronização offline.
+- `scaleSystem()`: Método para escalabilidade do sistema.
+- `scaleDatabase()`: Método para escalabilidade do banco de dados.
+- `scaleRealTime()`: Método para escalabilidade em tempo real.
+- `scaleCloudService()`: Método para escalabilidade de serviços em nuvem.
 
-```typescript
-collection.findOne({ name: "Maria" }, (err, doc) => {
-  if (err) throw err;
-  if (doc) {
-    console.log("Document found:", doc);
-  } else {
-    console.log("No document found with the provided criteria.");
-  }
-});
-```
+### Cloud Storage Service
 
-Update Document
+- `upload()`: Método para fazer upload de arquivos.
+- `download()`: Método para baixar arquivos.
+- `deleteFile()`: Método para excluir arquivos.
+- `getMetadata()`: Método para obter metadados de arquivos.
+- `getFilesByQuery()`: Método para obter arquivos com base em consultas.
+- `hostWebApp()`: Método para hospedar um aplicativo da web.
+- `unhostWebApp()`: Método para desativar a hospedagem de um aplicativo da web.
+- `getAppURL()`: Método para obter a URL de um aplicativo da web.
+- `scaleStorage()`: Método para escalabilidade de armazenamento em nuvem.
+- `scaleCloudService()`: Método para escalabilidade de serviços em nuvem.
 
-```typescript
-collection.updateOne(
-  { name: "Maria" },
-  { $set: { age: 31, city: "New York" } },
-  (err, result) => {
-    if (err) throw err;
-    console.log("Document updated successfully");
-  }
-);
-```
+### User Data
 
-Delete Document
+- `getId()`: Método para obter o ID de um usuário.
+- `getEmail()`: Método para obter o email de um usuário.
+- `getRoles()`: Método para obter as funções de um usuário.
 
-```typescript
-collection.deleteOne({ name: "Maria" }, (err, result) => {
-  if (err) throw err;
-  console.log("Document deleted successfully");
-});
-```
+### Analytic Service
 
-Advanced Queries
+- `trackEvent()`: Método para rastrear eventos e métricas.
+- `trackUser()`: Método para rastrear informações de usuário.
+- `analyzeData()`: Método para analisar dados e métricas.
+- `scaleSystem()`: Método para escalabilidade do sistema.
 
-```typescript
-collection
-  .find({
-    $and: [{ age: { $gte: 25 } }, { city: "New York" }],
-  })
-  .toArray((err, docs) => {
-    if (err) throw err;
-    console.log("Documents found:", docs);
-  });
-```
+### Data Storage
 
-Sorting
+- `storeData()`: Método para armazenar dados.
+- `retrieveData()`: Método para recuperar dados.
+- `updateData()`: Método para atualizar dados.
+- `deleteData()`: Método para excluir dados.
+- `queryData()`: Método para consultar dados.
+- `scaleStorage()`: Método para escalabilidade de armazenamento de dados.
 
-```typescript
-collection
-  .find()
-  .sort({ age: -1 })
-  .toArray((err, docs) => {
-    if (err) throw err;
-    console.log("Documents found (sorted by age in descending order):", docs);
-  });
-```
+### File Metadata
 
-### Firebase (usando JavaScript):
+- `getMetadata()`: Método para obter metadados de arquivos.
+- `scaleStorage()`: Método para escalabilidade de metadados.
 
-Consulta avançada:
+### Cloud Functions
 
-```JavaScript
-// Consulta avançada com Firebase
-db.collection("usuarios")
-  .where("idade", ">=", 25)
-  .where("cidade", "==", "São Paulo")
-  .get()
-  .then((querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-      console.log("Dados do documento:", doc.data());
-    });
-  })
-  .catch((error) => {
-    console.error("Erro na consulta: ", error);
-  });
+- `createFunction()`: Método para criar uma função na nuvem.
+- `updateFunction()`: Método para atualizar uma função na nuvem.
+- `invokeFunction()`: Método para invocar uma função na nuvem.
+- `deleteFunction()`: Método para excluir uma função na nuvem.
 
-```
+### Push Notifications
 
-Ordenação:
+- `sendPush()`: Método para enviar notificações push.
+- `subscribeToPush()`: Método para se inscrever em notificações push.
+- `unsubscribeFromPush()`: Método para cancelar a inscrição em notificações push.
 
-```typescript
-// Consulta com ordenação
-db.collection("usuarios")
-  .orderBy("idade", "desc")
-  .get()
-  .then((querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-      console.log("Dados do documento:", doc.data());
-    });
-  })
-  .catch((error) => {
-    console.error("Erro na consulta: ", error);
-  });
-```
+### App Hosting
 
-Filtro de documentos:
+- `hostWebApp()`: Método para hospedar um aplicativo da web.
+- `unhostWebApp()`: Método para desativar a hospedagem de um aplicativo da web.
+- `getAppURL()`: Método para obter a URL de um aplicativo da web.
 
-```typescript
-// Consulta com filtro de documentos
-db.collection("usuarios")
-  .where("cidade", "==", "São Paulo")
-  .get()
-  .then((querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-      console.log("Dados do documento:", doc.data());
-    });
-  })
-  .catch((error) => {
-    console.error("Erro na consulta: ", error);
-  });
-```
+## Relações
 
-Limitação de Resultados:
+- `Authentication System` usa `Real-Time Database` para gerenciar dados de usuário.
+- `Authentication System` usa `Cloud Storage Service` para armazenar arquivos.
+- `Real-Time Database` e `Cloud Storage Service` implementam `ScalabilityInterface` para fornecer escalabilidade ao sistema.
+- `Real-Time Database` e `Cloud Storage Service` utilizam `User Data` para acessar informações do usuário.
+- `Analytic Service` é responsável por rastrear eventos, métricas e análises no sistema.
+- `Data Storage` lida com o armazenamento e gerenciamento de dados.
+- `File Metadata` fornece metadados de arquivos.
+- `Cloud Functions` oferece funcionalidades de funções na nuvem.
+- `Push Notifications` lida com notificações push no sistema.
+- `App Hosting` cuida da hospedagem de aplicativos da web.
 
-```typescript
-// Consultar com limite de resultados
-db.collection("usuarios")
-  .limit(5)
-  .get()
-  .then((querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-      console.log("Dados do documento:", doc.data());
-    });
-  })
-  .catch((error) => {
-    console.error("Erro na consulta: ", error);
-  });
-```
-
-Armazenamento de Dados de Geolocalização no Firebase Cloud Firestore
-
-```typescript
-const db = firebase.firestore();
-db.collection("geolocations").add({
-  latitude: 40.7128,
-  longitude: -74.006,
-  name: "Nova York",
-});
-```
-
-```typescript
-const GeoFirestore = require("geofirestore").GeoFirestore;
-const GeoPoint = require("geofirestore").GeoPoint;
-
-const db = firebase.firestore();
-const geofirestore = new GeoFirestore(db);
-
-const query = geofirestore.collection("geolocations");
-const center = new GeoPoint(-22.9068, -43.1729); // Coordenadas do Rio de Janeiro
-const radius = 10; // Raio em quilômetros
-
-const queryResults = query.near({ center, radius });
-queryResults.get().then((snapshot) => {
-  snapshot.docs.forEach((doc) => {
-    console.log("Localização encontrada:", doc.data());
-  });
-});
-```
+![Alt text](image.png)
