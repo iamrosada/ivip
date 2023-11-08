@@ -100,3 +100,5 @@ Este documento descreve as classes, métodos e relações no sistema de cloud da
 - `Cloud Functions` oferece funcionalidades de funções na nuvem.
 - `Push Notifications` lida com notificações push no sistema.
 - `App Hosting` cuida da hospedagem de aplicativos da web.
+
+![Alt text](image.png)
