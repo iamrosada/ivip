@@ -1,6 +1,6 @@
 # Documentação do Sistema, Usando Modelagem de sistema orientados a objetos.
 
-Este documento descreve as classes, métodos e relações no sistema.
+Este documento descreve as classes, métodos e relações no sistema de cloud da IVIPCOIN
 
 ## Classes
 
